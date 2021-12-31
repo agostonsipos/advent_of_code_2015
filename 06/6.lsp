@@ -1,0 +1,47 @@
+(defun inside-box (i j a b c d)
+	(and (>= i a) (<= i c) (>= j b) (<= j d))
+)
+
+(defun is-on-aux (cmds i j on)
+	(if (null cmds) on
+	(let ((cmd (car cmds)) (rest (cdr cmds)))
+	(is-on-aux rest i j 
+		(if (not (inside-box i j (second cmd) (third cmd) (fourth cmd) (fifth cmd))) on
+		(if (string= (car cmd) "turn on") T
+		(if (string= (car cmd) "turn off") NIL
+		(not on)))))))
+)
+
+(defparameter *commands* '(("toggle" 461 550 564 900) ("turn off" 370 39 425 839) ("turn off" 464 858 833 915) ("turn off" 812 389 865 874) ("turn on" 599 989 806 993) ("turn on" 376 415 768 548) ("turn on" 606 361 892 600) ("turn off" 448 208 645 684) ("toggle" 50 472 452 788) ("toggle" 205 417 703 826) ("toggle" 533 331 906 873) ("toggle" 857 493 989 970) ("turn off" 631 950 894 975) ("turn off" 387 19 720 700) ("turn off" 511 843 581 945) ("toggle" 514 557 662 883) ("turn off" 269 809 876 847) ("turn off" 149 517 716 777) ("turn off" 994 939 998 988) ("toggle" 467 662 555 957) ("turn on" 952 417 954 845) ("turn on" 565 226 944 880) ("turn on" 214 319 805 722) ("toggle" 532 276 636 847) ("toggle" 619 80 689 507) ("turn on" 390 706 884 722) ("toggle" 17 634 537 766) ("toggle" 706 440 834 441) ("toggle" 318 207 499 530) ("toggle" 698 185 830 343) ("toggle" 566 679 744 716) ("toggle" 347 482 959 482) ("toggle" 39 799 981 872) ("turn on" 583 543 846 710) ("turn off" 367 664 595 872) ("turn on" 805 439 964 995) ("toggle" 209 584 513 802) ("turn off" 106 497 266 770) ("turn on" 975 2 984 623) ("turn off" 316 684 369 876) ("turn off" 30 309 259 554) ("turn off" 399 680 861 942) ("toggle" 227 740 850 829) ("turn on" 386 603 552 879) ("turn off" 703 795 791 963) ("turn off" 573 803 996 878) ("turn off" 993 939 997 951) ("turn on" 809 221 869 723) ("turn off" 38 720 682 751) ("turn off" 318 732 720 976) ("toggle" 88 459 392 654) ("turn off" 865 654 911 956) ("toggle" 264 284 857 956) ("turn off" 281 776 610 797) ("toggle" 492 660 647 910) ("turn off" 879 703 925 981) ("turn off" 772 414 974 518) ("turn on" 694 41 755 96) ("turn on" 452 406 885 881) ("turn off" 107 905 497 910) ("turn off" 647 222 910 532) ("turn on" 679 40 845 358) ("turn off" 144 205 556 362) ("turn on" 871 804 962 878) ("turn on" 545 676 545 929) ("turn off" 316 716 413 941) ("toggle" 488 826 755 971) ("toggle" 957 832 976 992) ("toggle" 857 770 905 964) ("toggle" 319 198 787 673) ("turn on" 832 813 863 844) ("turn on" 818 296 818 681) ("turn on" 71 699 91 960) ("turn off" 838 578 967 928) ("toggle" 440 856 507 942) ("toggle" 121 970 151 974) ("toggle" 391 192 659 751) ("turn on" 78 210 681 419) ("turn on" 324 591 593 939) ("toggle" 159 366 249 760) ("turn off" 617 167 954 601) ("toggle" 484 607 733 657) ("turn on" 587 96 888 819) ("turn off" 680 984 941 991) ("turn on" 800 512 968 691) ("turn off" 123 588 853 603) ("turn on" 1 862 507 912) ("turn on" 699 839 973 878) ("turn off" 848 89 887 893) ("toggle" 344 353 462 403) ("turn on" 780 731 841 760) ("toggle" 693 973 847 984) ("toggle" 989 936 996 958) ("toggle" 168 475 206 963) ("turn on" 742 683 769 845) ("toggle" 768 116 987 396) ("turn on" 190 364 617 526) ("turn off" 470 266 530 839) ("toggle" 122 497 969 645) ("turn off" 492 432 827 790) ("turn on" 505 636 957 820) ("turn on" 295 476 698 958) ("toggle" 63 298 202 396) ("turn on" 157 315 412 939) ("turn off" 69 789 134 837) ("turn off" 678 335 896 541) ("toggle" 140 516 842 668) ("turn off" 697 585 712 668) ("toggle" 507 832 578 949) ("turn on" 678 279 886 621) ("toggle" 449 744 826 910) ("turn off" 835 354 921 741) ("toggle" 924 878 985 952) ("turn on" 666 503 922 905) ("turn on" 947 453 961 587) ("toggle" 525 190 795 654) ("turn off" 62 320 896 362) ("turn on" 21 458 972 536) ("turn on" 446 429 821 970) ("toggle" 376 423 805 455) ("toggle" 494 896 715 937) ("turn on" 583 270 667 482) ("turn off" 183 468 280 548) ("toggle" 623 289 750 524) ("turn on" 836 706 967 768) ("turn on" 419 569 912 908) ("turn on" 428 260 660 433) ("turn off" 683 627 916 816) ("turn on" 447 973 866 980) ("turn on" 688 607 938 990) ("turn on" 245 187 597 405) ("turn off" 558 843 841 942) ("turn off" 325 666 713 834) ("toggle" 672 606 814 935) ("turn off" 161 812 490 954) ("turn on" 950 362 985 898) ("turn on" 143 22 205 821) ("turn on" 89 762 607 790) ("toggle" 234 245 827 303) ("turn on" 65 599 764 997) ("turn on" 232 466 965 695) ("turn on" 739 122 975 590) ("turn off" 206 112 940 558) ("toggle" 690 365 988 552) ("turn on" 907 438 977 691) ("turn off" 838 809 944 869) ("turn on" 222 12 541 832) ("toggle" 337 66 669 812) ("turn on" 732 821 897 912) ("toggle" 182 862 638 996) ("turn on" 955 808 983 847) ("toggle" 346 227 841 696) ("turn on" 983 270 989 756) ("turn off" 874 849 876 905) ("turn off" 7 760 678 795) ("toggle" 973 977 995 983) ("turn off" 911 961 914 976) ("turn on" 913 557 952 722) ("turn off" 607 933 939 999) ("turn on" 226 604 517 622) ("turn off" 3 564 344 842) ("toggle" 340 578 428 610) ("turn on" 248 916 687 925) ("toggle" 650 185 955 965) ("toggle" 831 359 933 536) ("turn off" 544 614 896 953) ("toggle" 648 939 975 997) ("turn on" 464 269 710 521) ("turn off" 643 149 791 320) ("turn off" 875 549 972 643) ("turn off" 953 969 971 972) ("turn off" 236 474 772 591) ("toggle" 313 212 489 723) ("toggle" 896 829 897 837) ("toggle" 544 449 995 905) ("turn off" 278 645 977 876) ("turn off" 887 947 946 977) ("turn on" 342 861 725 935) ("turn on" 636 316 692 513) ("toggle" 857 470 950 528) ("turn off" 736 196 826 889) ("turn on" 17 878 850 987) ("turn on" 142 968 169 987) ("turn on" 46 470 912 853) ("turn on" 182 252 279 941) ("toggle" 261 143 969 657) ("turn off" 69 600 518 710) ("turn on" 372 379 779 386) ("toggle" 867 391 911 601) ("turn off" 174 287 900 536) ("toggle" 951 842 993 963) ("turn off" 626 733 985 827) ("toggle" 622 70 666 291) ("turn off" 980 671 985 835) ("turn off" 477 63 910 72) ("turn off" 779 39 940 142) ("turn on" 986 570 997 638) ("toggle" 842 805 943 985) ("turn off" 890 886 976 927) ("turn off" 893 172 897 619) ("turn off" 198 780 835 826) ("toggle" 202 209 219 291) ("turn off" 193 52 833 283) ("toggle" 414 427 987 972) ("turn on" 375 231 668 236) ("turn off" 646 598 869 663) ("toggle" 271 462 414 650) ("turn off" 679 121 845 467) ("toggle" 76 847 504 904) ("turn off" 15 617 509 810) ("toggle" 248 105 312 451) ("turn off" 126 546 922 879) ("turn on" 531 831 903 872) ("toggle" 602 431 892 792) ("turn off" 795 223 892 623) ("toggle" 167 721 533 929) ("toggle" 813 251 998 484) ("toggle" 64 640 752 942) ("turn on" 155 955 892 985) ("turn on" 251 329 996 497) ("turn off" 341 716 462 994) ("toggle" 760 127 829 189) ("turn on" 86 413 408 518) ("toggle" 340 102 918 558) ("turn off" 441 642 751 889) ("turn on" 785 292 845 325) ("turn off" 123 389 725 828) ("turn on" 905 73 983 270) ("turn off" 807 86 879 276) ("toggle" 500 866 864 916) ("turn on" 809 366 828 534) ("toggle" 219 356 720 617) ("turn off" 320 964 769 990) ("turn off" 903 167 936 631) ("toggle" 300 137 333 693) ("toggle" 5 675 755 848) ("turn off" 852 235 946 783) ("toggle" 355 556 941 664) ("turn on" 810 830 867 891) ("turn off" 509 869 667 903) ("toggle" 769 400 873 892) ("turn on" 553 614 810 729) ("turn on" 179 873 589 962) ("turn off" 466 866 768 926) ("toggle" 143 943 465 984) ("toggle" 182 380 569 552) ("turn off" 735 808 917 910) ("turn on" 731 802 910 847) ("turn off" 522 74 731 485) ("turn on" 444 127 566 996) ("turn off" 232 962 893 979) ("turn off" 231 492 790 976) ("turn on" 874 567 943 684) ("toggle" 911 840 990 932) ("toggle" 547 895 667 935) ("turn off" 93 294 648 636) ("turn off" 190 902 532 970) ("turn off" 451 530 704 613) ("toggle" 936 774 937 775) ("turn off" 116 843 533 934) ("turn on" 950 906 986 993) ("turn on" 910 51 945 989) ("turn on" 986 498 994 945) ("turn off" 125 324 433 704) ("turn off" 60 313 75 728) ("turn on" 899 494 940 947) ("toggle" 832 316 971 817) ("toggle" 994 983 998 984) ("toggle" 23 353 917 845) ("toggle" 174 799 658 859) ("turn off" 490 878 534 887) ("turn off" 623 963 917 975) ("toggle" 721 333 816 975) ("toggle" 589 687 890 921) ("turn on" 936 388 948 560) ("turn off" 485 17 655 610) ("turn on" 435 158 689 495) ("turn on" 192 934 734 936) ("turn off" 299 723 622 847) ("toggle" 484 160 812 942) ("turn off" 245 754 818 851) ("turn on" 298 419 824 634) ("toggle" 868 687 969 760) ("toggle" 131 250 685 426) ("turn off" 201 954 997 983) ("turn on" 353 910 832 961) ("turn off" 518 781 645 875) ("turn off" 866 97 924 784) ("toggle" 836 599 857 767) ("turn on" 80 957 776 968) ("toggle" 277 130 513 244) ("turn off" 62 266 854 434) ("turn on" 792 764 872 842) ("turn off" 160 949 273 989) ("turn off" 664 203 694 754) ("toggle" 491 615 998 836) ("turn off" 210 146 221 482) ("turn off" 209 780 572 894) ("turn on" 766 112 792 868) ("turn on" 222 12 856 241)))
+
+(defun is-on (xy) (is-on-aux *commands* (first xy) (second xy) NIL))
+
+(defparameter *tab*
+		(apply #'concatenate 'list 
+		(loop for x from 0 to 999
+			collect (loop for y from 0 to 999
+				collect (list x y))))
+)
+
+(defun countlights ()
+	(count-if #'is-on *tab*)
+)
+
+(defun brightness-aux (cmds i j n)
+	(if (null cmds) n
+	(let ((cmd (car cmds)) (rest (cdr cmds)))
+	(brightness-aux rest i j 
+		(if (not (inside-box i j (second cmd) (third cmd) (fourth cmd) (fifth cmd))) n
+		(if (string= (car cmd) "turn on") (+ n 1)
+		(if (string= (car cmd) "turn off") (max (- n 1) 0)
+		(+ n 2)))))))
+)
+
+(defun brightness (xy) (brightness-aux *commands* (first xy) (second xy) 0))
+
+(defun total-brightness ()
+	(reduce #'+ (mapcar #'brightness *tab*))
+)
+
+(countlights)
+(total-brightness)
