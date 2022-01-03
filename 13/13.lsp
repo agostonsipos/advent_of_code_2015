@@ -31,4 +31,4 @@
 )
 
 (reduce 'max (mapcar (lambda (points) (cost-route 'dist points)) (all-permutations (collect-points))))
-(reduce 'max (mapcar (lambda (points) (cost-route 'dist-with-me points)) (all-permutations (points-with-me))))
+(reduce 'max (mapcar (lambda (points) (cost-route 'dist points)) (all-permutations (points-with-me))))

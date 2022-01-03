@@ -3,11 +3,11 @@
 
 
 (defun dist (a b)
-	(third (find-if (lambda (x) (or (and (eq (first x) a) (eq (second x) b)) (and (eq (first x) b) (eq (second x) a)))) *inp1*))
+	(third (find-if (lambda (x) (or (and (eq (first x) a) (eq (second x) b)) (and (eq (first x) b) (eq (second x) a)))) *inp*))
 )
 
 (defun collect-points ()
-	(remove-duplicates (append (mapcar 'first *inp1*) (mapcar 'second *inp1*)))
+	(remove-duplicates (append (mapcar 'first *inp*) (mapcar 'second *inp*)))
 )
 
 (collect-points)
