@@ -23,3 +23,9 @@
 
 (defun shortest-permutations (options)
 	(same-number-start (sort (mapcar 'length options) #'<) 1))
+
+(defun adv17 ()
+	(options 150 *inp*))
+
+(defun adv17b ()
+	(shortest-permutations (options-list 150 *inp*)))
