@@ -17,7 +17,7 @@
 
 
 (defun 500calories (percents)
-	(= (reduce '+ (mapcar (lambda (a) (* (first a) (second a))) (mapcar 'list percents (mapcar 'sixth *inp*)))) 500)
+	(= (reduce '+ (mapcar '* percents (mapcar 'sixth *inp*))) 500)
 )
 
 (reduce 'max (mapcar 'score *recipes*))
